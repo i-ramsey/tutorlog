@@ -1,0 +1,21 @@
+<% layout('layouts/boilerplate.ejs')%>
+
+
+    <div class="d-flex flex-column align-items-center justify-content-center mt-5 col-8 position-absolute">
+        <h1 class="col-6">Welcome to the tutoring center!</h1>
+        <form action="/signin" class="validated-form d-flex flex-column align-items-right mb-3" method="POST"
+            novalidate>
+            <div class="mb-3">
+                <div class="d-flex flex-column align-self-center">
+                    <label for="studentId" class="form-label"></label>
+                    <input type="text" class="form-control align-self-center" id="studentId" name="studentId"
+                        placeholder="enter student ID number" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+
+
+            <button class="btn btn-success">Sign In as Student</button>
+        </form>
+        <a href="/tutor" class="btn btn-info">Click Here for Tutor Login</a>
+    </div>

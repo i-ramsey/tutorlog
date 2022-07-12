@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate.ejs')%>
+    <div class="d-flex flex-row justify-content-between">
+        <h1 class="col-6">Visit Details</h1>
+        <div>
+            <a href="/visits" class="btn btn-primary">Return to All Visits</a>
+        </div>
+    </div>
+    <h5>
+        Student: <%=visit.studentName%>
+    </h5>
+    <h6>In: <%=visit.displayStart%>
+    </h6>
+    <%if(visit.displayEnd) {%>
+        <h6>Out: <%=visit.displayEnd%>
+        </h6>
+        <%}%>
+            <p>
+                Topic: <%=visit.subject%>
+            </p>
+            <div class="col-2">
+                <a href="/visits/<%=visit._id%>/edit" class="btn btn-info">edit</a>
+                <form action="/visits/<%=visit._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger btn-sm mt-1">Delete</button>
+                </form>
+            </div>
