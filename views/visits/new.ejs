@@ -1,20 +1,21 @@
 <% layout('layouts/boilerplate.ejs')%>
-    <form class="validated-form d-flex flex-column align-items-right mb-3" action="/visits" method="POST" novalidate>
+    <form class="validated-form d-flex flex-column align-items-right mb-3" action="/visits" method="POST">
         <label class="form-label" for="startTime">Start Time</label>
-        <input class="form-control align-self-center" if="startTime" name="visit[startTime]" type="datetime-local"
+        <input class="form-control align-self-center" id="startTime" name="visit[startTime]" type="datetime-local"
             required>
 
         <label class="form-label" for="endTime">End Time</label>
-        <input class="form-control align-self-center" if="endTime" name="visit[endTime]" type="datetime-local" required>
+        <input class="form-control align-self-center" id="endTime" name="visit[endTime]" type="datetime-local" required>
 
         <label class="form-label" for="studentName">Student's Name</label>
-        <input class="form-control align-self-center" if="studentName" name="visit[studentName]" type="text" required>
+        <input class="form-control align-self-center" id="studentName" name="visit[studentName]" type="text" required>
 
         <label class="form-label" for="subject">Subject Covered</label>
-        <input class="form-control align-self-center" if="subject" name="visit[subject]" type="text" required>
+        <input class="form-control align-self-center" id="subject" name="visit[subject]" type="text" required>
 
         <label class="form-label" for="studentId">Student's ID</label>
-        <input class="form-control align-self-center" if="studentId" name="visit[studentId]" type="text" required>
+        <input class="form-control align-self-center" id="studentId" name="visit[studentId]" type="text" required>
 
-        <button class="btn btn-info">Submit</button>
+        <button class="btn btn-info mt-1">Submit</button>
     </form>
+    <a href="/visits/" class="btn btn-danger w-100">Cancel</a>

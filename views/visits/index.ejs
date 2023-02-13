@@ -1,15 +1,17 @@
 <% layout('layouts/boilerplate.ejs')%>
     <div class="d-flex justify-content-between">
         <h1>All visits </h1>
+
         <div>
-            <a class="btn btn-primary btn-lg" href="visits/new">Log New Visit</a>
+            <a class="btn btn-primary btn-lg" href="/visits/new">Log New Visit</a>
         </div>
     </div>
 
-    <%for (visit of visits) {%>
-        <div class="list-group">
+
+    <div class="list-group mb-3">
+        <%for (visit of visits) {%>
             <a href="/visits/<%=visit._id%>" class="list-group-item list-group-item-action ">
                 <%=visit.studentName%> - <%=visit.displayDate%>
             </a>
-        </div>
-        <%}%>
+            <%}%>
+    </div>
