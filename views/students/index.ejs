@@ -1,0 +1,17 @@
+<% layout('layouts/boilerplate.ejs')%>
+    <div class="d-flex justify-content-between">
+        <h1>All students </h1>
+
+        <div>
+            <a class="btn btn-primary btn-lg" href="/students/new">Log New student</a>
+        </div>
+    </div>
+
+    <%for (student of students) {%>
+        <div class="list-group">
+            <a href="/students/<%=student._id%>" class="list-group-item list-group-item-action ">
+                <%=student.firstName%>
+                    <%=student.lastName%>
+            </a>
+        </div>
+        <%}%>

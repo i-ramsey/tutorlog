@@ -1,0 +1,12 @@
+<% layout('layouts/boilerplate.ejs')%>
+    <h1>Register New Student</h1>
+    <form class="validated-form d-flex flex-column align-items-right mb-3" action="/students" method="POST">
+        <label class="form-label" for="firstName">First Name</label>
+        <input class="form-control align-self-center" id="firstName" name="student[firstName]" type="text" required>
+
+        <label class="form-label" for="lastName">Last Name</label>
+        <input class="form-control align-self-center" id="lastName" name="student[lastName]]" type="text" required>
+
+        <button class="btn btn-info mt-1">Submit</button>
+    </form>
+    <a href="/students/" class="btn btn-danger w-100">Cancel</a>
