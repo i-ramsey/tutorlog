@@ -21,9 +21,14 @@ const getLocalISOString = (utcTime) => {
 
 
 router.get('/', catchAsync(async (req, res) => {
-    let visits = await Visit.find({});
+    let visits = await Visit.find({}).sort({ startTime: -1 });
     for (let visit of visits) {
-        visit.displayDate = visit.startTime.toDateString();
+        try {
+            visit.displayDate = visit.startTime.toDateString();
+        }
+        catch {
+            console.dir(visit);
+        }
     }
     res.render('visits/index', { visits });
 }))
@@ -31,8 +36,6 @@ router.get('/', catchAsync(async (req, res) => {
 router.post('/', catchAsync(async (req, res) => {
 
     const visit = new Visit(req.body.visit);
-    //next line safe once joi validation is in place (as long as studentId is required)
-    //require student id
     const student = await Student.findOne({ studentId: visit.studentId });
     if (student) {
         visit.student = student._id;
