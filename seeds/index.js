@@ -1,9 +1,16 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+
+}
+
 const mongoose = require('mongoose');
 const { firstNames, lastNames } = require('./names');
 const Student = require('../models/student');
 const Visit = require('../models/visit');
 
-mongoose.connect('mongodb://localhost:27017/tutor-log', {
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/tutor-log';
+
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
