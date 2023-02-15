@@ -1,14 +1,18 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+
+}
+
 const express = require('express');
 const ejsMate = require('ejs-mate');
 const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
 const Student = require('./models/student');
 const Visit = require('./models/visit');
 const student = require('./models/student');
@@ -16,9 +20,9 @@ const student = require('./models/student');
 const visitRoutes = require('./routes/visits');
 
 
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/tutor-log';
 
-
-mongoose.connect('mongodb://localhost:27017/tutor-log', {
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -40,8 +44,24 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+const sessionSecret = process.env.SECRET || 'thisshouldbeabettersecret';
+
+const sessionStore = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: sessionSecret
+    }
+});
+
+MongoStore.on('error', (error) => {
+    console.log("error in MongoStore: ", error);
+});
+
 const sessionConfig = {
-    secret: 'thisshouldbeabettersecret',
+    name: 'tutorLogSession',
+    secret: sessionSecret,
+    store: sessionStore,
     resave: false,
     saveUninitialized: true,
     cookie: {
