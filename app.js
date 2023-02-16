@@ -96,7 +96,7 @@ app.post('/signin', catchAsync(async (req, res) => {
     const { studentId } = req.body;
     const student = await Student.findOne({ studentId: studentId })
     if (student) {
-        const latestVisit = await Visit.findById(student.visits.at(-1));
+        const latestVisit = await Visit.findById(student.visits[student.visits.length - 1]);
         if (latestVisit && !latestVisit.endTime) {
             latestVisit.endTime = Date.now();
             await latestVisit.save();
